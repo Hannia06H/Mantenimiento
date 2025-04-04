@@ -62,7 +62,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="indexnew.html">
                 <span class="fas fa-pizza-slice mr-2"></span>Pizzería <small>Deliciosa</small>
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -299,27 +299,20 @@
         $(document).ready(function() {
             // 1. Cargar datos del pedido y dirección desde localStorage
             const cart = JSON.parse(localStorage.getItem('pizzaCart')) || [];
-            const deliveryInfo = JSON.parse(localStorage.getItem('deliveryInfo')) || {
-                name: '',
-                phone: '',
-                address: '',
-                notes: ''
-            };
+            const deliveryInfo = JSON.parse(localStorage.getItem('deliveryInfo')) || null;
+
+            if (!deliveryInfo || !deliveryInfo.address || cart.length === 0) {
+                alert('Por favor completa tu pedido y datos de entrega primero');
+                window.location.href = 'ordernew.html';
+                return;
+            }
 
             // Mostrar información de entrega
-            if(deliveryInfo.name) {
-                $('#delivery-address').text(deliveryInfo.address);
-                $('#delivery-phone').text(deliveryInfo.phone);
-                $('#delivery-notes').text(deliveryInfo.notes || 'Ninguna');
-                
-                // Para el modal de confirmación
-                $('#delivery-details-modal').text(deliveryInfo.address);
-                $('#delivery-phone-modal').text('Teléfono: ' + deliveryInfo.phone);
-            } else {
-                // Redirigir si no hay datos de entrega
-                alert('Por favor completa tus datos de entrega primero');
-                window.location.href = 'ordernew.html';
-            }
+            $('#delivery-address').text(deliveryInfo.address);
+            $('#delivery-phone').text(deliveryInfo.phone);
+            $('#delivery-notes').text(deliveryInfo.notes || 'Ninguna');
+            $('#delivery-details-modal').text(deliveryInfo.address);
+            $('#delivery-phone-modal').text('Teléfono: ' + deliveryInfo.phone);
 
             // 2. Validación mejorada de tarjeta de crédito
             $('#cardNumber').on('input', function(e) {
