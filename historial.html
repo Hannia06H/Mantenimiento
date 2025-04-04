@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Pizzería - Historial de Pedidos</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .order-card {
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .order-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .order-status {
+            font-size: 0.8rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+        .status-delivered {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .status-cancelled {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .item-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .repeat-btn {
+            transition: all 0.3s ease;
+        }
+        .repeat-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span class="fas fa-pizza-slice mr-2"></span>Pizzería <small>Deliciosa</small>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="indexnew.html" class="nav-link">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="viewmenu.html" class="nav-link">Menú</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="ordernew.html" class="nav-link">Carrito</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="historial.html" class="nav-link">Historial</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="container py-5">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="font-weight-bold"><i class="fas fa-history mr-2"></i>Historial de Pedidos</h2>
+                <p class="text-muted">Revisa tus pedidos anteriores o repite los que más te gustaron</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <!-- Filtros -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-2 mb-md-0">
+                                <label for="date-filter">Filtrar por fecha:</label>
+                                <select class="form-control" id="date-filter">
+                                    <option value="all">Todas las fechas</option>
+                                    <option value="month">Último mes</option>
+                                    <option value="week">Última semana</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-2 mb-md-0">
+                                <label for="status-filter">Filtrar por estado:</label>
+                                <select class="form-control" id="status-filter">
+                                    <option value="all">Todos los estados</option>
+                                    <option value="delivered">Entregados</option>
+                                    <option value="pending">Pendientes</option>
+                                    <option value="cancelled">Cancelados</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="search">Buscar pedido:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="search" placeholder="Buscar...">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista de Pedidos -->
+                <div id="orders-container">
+                    <!-- Los pedidos se cargarán aquí con JavaScript -->
+                    <div class="text-center py-5" id="empty-orders-message">
+                        <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+                        <h5 class="text-muted">No tienes pedidos anteriores</h5>
+                        <a href="menu.html" class="btn btn-primary mt-3">Ir al Menú</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2023 Pizzería Deliciosa. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal Detalle Pedido -->
+    <div class="modal fade" id="orderDetailModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Detalles del Pedido</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="order-detail-content">
+                    <!-- Contenido del pedido se cargará aquí -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="repeat-order-btn">Repetir Pedido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Datos de ejemplo (en un sistema real estos vendrían de una API)
+            const orders = [
+                {
+                    id: "PZ-2023-001",
+                    date: "2023-05-15",
+                    status: "delivered",
+                    items: [
+                        { id: 1, name: "Pizza Italiana", price: 12.99, quantity: 1 },
+                        { id: 3, name: "Pizza Pepperoni", price: 13.99, quantity: 2 },
+                        { id: 10, name: "Agua Mineral", price: 1.99, quantity: 2 }
+                    ],
+                    subtotal: 42.96,
+                    delivery: 2.50,
+                    total: 45.46,
+                    address: "Calle Principal #123, Ciudad",
+                    payment: "Efectivo"
+                },
+                {
+                    id: "PZ-2023-002",
+                    date: "2023-05-10",
+                    status: "delivered",
+                    items: [
+                        { id: 5, name: "Pizza BBQ", price: 16.99, quantity: 1 },
+                        { id: 11, name: "Cerveza Artesanal", price: 4.50, quantity: 1 }
+                    ],
+                    subtotal: 21.49,
+                    delivery: 2.50,
+                    total: 23.99,
+                    address: "Avenida Central #456, Ciudad",
+                    payment: "Tarjeta"
+                },
+                {
+                    id: "PZ-2023-003",
+                    date: "2023-05-05",
+                    status: "cancelled",
+                    items: [
+                        { id: 2, name: "Pizza Hawaiana", price: 14.99, quantity: 1 }
+                    ],
+                    subtotal: 14.99,
+                    delivery: 2.50,
+                    total: 17.49,
+                    address: "Calle Secundaria #789, Ciudad",
+                    payment: "Efectivo",
+                    cancellationReason: "Cancelado por el cliente"
+                }
+            ];
+
+            // Mostrar pedidos
+            function displayOrders(filteredOrders = orders) {
+                const $ordersContainer = $('#orders-container');
+                const $emptyOrdersMessage = $('#empty-orders-message');
+                
+                if (filteredOrders.length === 0) {
+                    $emptyOrdersMessage.show();
+                    $ordersContainer.html('<div class="text-center py-5" id="empty-orders-message"><i class="fas fa-box-open fa-3x text-muted mb-3"></i><h5 class="text-muted">No se encontraron pedidos</h5><a href="menu.html" class="btn btn-primary mt-3">Ir al Menú</a></div>');
+                    return;
+                }
+                
+                $emptyOrdersMessage.hide();
+                
+                let html = '';
+                
+                // Ordenar por fecha (más reciente primero)
+                filteredOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                filteredOrders.forEach(order => {
+                    // Formatear fecha
+                    const formattedDate = new Date(order.date).toLocaleDateString('es-ES', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                    
+                    // Determinar clase de estado
+                    let statusClass, statusText;
+                    switch(order.status) {
+                        case 'delivered':
+                            statusClass = 'status-delivered';
+                            statusText = 'Entregado';
+                            break;
+                        case 'pending':
+                            statusClass = 'status-pending';
+                            statusText = 'Pendiente';
+                            break;
+                        case 'cancelled':
+                            statusClass = 'status-cancelled';
+                            statusText = 'Cancelado';
+                            break;
+                    }
+                    
+                    html += `
+                        <div class="card mb-3 order-card" data-order-id="${order.id}">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5 class="mb-0">Pedido #${order.id}</h5>
+                                    <small class="text-muted">${formattedDate}</small>
+                                </div>
+                                <span class="order-status ${statusClass}">${statusText}</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6>Resumen:</h6>
+                                        <ul class="list-unstyled">
+                                            <li><strong>${order.items.reduce((acc, item) => acc + item.quantity, 0)} items</strong></li>
+                                            <li>Total: <strong>$${order.total.toFixed(2)}</strong></li>
+                                            <li>Método de pago: ${order.payment}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6>Dirección de entrega:</h6>
+                                        <p>${order.address}</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between mt-3">
+                                    <button class="btn btn-outline-primary btn-sm view-detail" data-order-id="${order.id}">
+                                        <i class="fas fa-eye mr-1"></i> Ver Detalles
+                                    </button>
+                                    ${order.status !== 'cancelled' ? 
+                                        `<button class="btn btn-primary btn-sm repeat-btn" data-order-id="${order.id}">
+                                            <i class="fas fa-redo mr-1"></i> Repetir Pedido
+                                        </button>` : 
+                                        '<button class="btn btn-secondary btn-sm" disabled>No se puede repetir</button>'
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                $ordersContainer.html(html);
+            }
+            
+            // Cargar pedidos al inicio
+            displayOrders();
+            
+            // Filtrar pedidos
+            $('#date-filter, #status-filter').change(function() {
+                const dateFilter = $('#date-filter').val();
+                const statusFilter = $('#status-filter').val();
+                
+                let filteredOrders = [...orders];
+                
+                // Filtrar por fecha
+                if (dateFilter !== 'all') {
+                    const today = new Date();
+                    let cutoffDate;
+                    
+                    if (dateFilter === 'month') {
+                        cutoffDate = new Date(today.setMonth(today.getMonth() - 1));
+                    } else if (dateFilter === 'week') {
+                        cutoffDate = new Date(today.setDate(today.getDate() - 7));
+                    }
+                    
+                    filteredOrders = filteredOrders.filter(order => new Date(order.date) >= cutoffDate);
+                }
+                
+                // Filtrar por estado
+                if (statusFilter !== 'all') {
+                    filteredOrders = filteredOrders.filter(order => order.status === statusFilter);
+                }
+                
+                displayOrders(filteredOrders);
+            });
+            
+            // Buscar pedidos
+            $('#search').keyup(function() {
+                const searchTerm = $(this).val().toLowerCase();
+                
+                if (searchTerm.length === 0) {
+                    displayOrders();
+                    return;
+                }
+                
+                const filteredOrders = orders.filter(order => 
+                    order.id.toLowerCase().includes(searchTerm) || 
+                    order.address.toLowerCase().includes(searchTerm) ||
+                    order.items.some(item => item.name.toLowerCase().includes(searchTerm))
+                );
+                
+                displayOrders(filteredOrders);
+            });
+            
+            // Ver detalles del pedido
+            $(document).on('click', '.view-detail', function() {
+                const orderId = $(this).data('order-id');
+                const order = orders.find(o => o.id === orderId);
+                
+                if (!order) return;
+                
+                // Formatear fecha
+                const formattedDate = new Date(order.date).toLocaleDateString('es-ES', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                // Determinar clase de estado
+                let statusClass, statusText;
+                switch(order.status) {
+                    case 'delivered':
+                        statusClass = 'status-delivered';
+                        statusText = 'Entregado';
+                        break;
+                    case 'pending':
+                        statusClass = 'status-pending';
+                        statusText = 'Pendiente';
+                        break;
+                    case 'cancelled':
+                        statusClass = 'status-cancelled';
+                        statusText = 'Cancelado';
+                        break;
+                }
+                
+                let itemsHtml = '';
+                order.items.forEach(item => {
+                    itemsHtml += `
+                        <div class="d-flex justify-content-between align-items-center mb-2 p-2 border-bottom">
+                            <div>
+                                <h6 class="mb-1">${item.name}</h6>
+                                <small class="text-muted">$${item.price.toFixed(2)} c/u</small>
+                            </div>
+                            <div class="text-right">
+                                <span class="d-block">${item.quantity} x $${item.price.toFixed(2)}</span>
+                                <strong>$${(item.price * item.quantity).toFixed(2)}</strong>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                let cancellationHtml = '';
+                if (order.status === 'cancelled' && order.cancellationReason) {
+                    cancellationHtml = `
+                        <div class="alert alert-danger mt-3">
+                            <strong>Razón de cancelación:</strong> ${order.cancellationReason}
+                        </div>
+                    `;
+                }
+                
+                $('#order-detail-content').html(`
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Número de pedido:</strong> ${order.id}</p>
+                            <p><strong>Fecha:</strong> ${formattedDate}</p>
+                            <p><strong>Estado:</strong> <span class="${statusClass}">${statusText}</span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Dirección de entrega:</strong></p>
+                            <p>${order.address}</p>
+                            <p><strong>Método de pago:</strong> ${order.payment}</p>
+                        </div>
+                    </div>
+                    
+                    <h5 class="mt-4">Items del pedido</h5>
+                    <div class="item-list mb-3">
+                        ${itemsHtml}
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p><strong>Subtotal:</strong> $${order.subtotal.toFixed(2)}</p>
+                            <p><strong>Costo de envío:</strong> $${order.delivery.toFixed(2)}</p>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <h5><strong>Total:</strong> $${order.total.toFixed(2)}</h5>
+                        </div>
+                    </div>
+                    
+                    ${cancellationHtml}
+                `);
+                
+                // Configurar botón de repetir pedido
+                $('#repeat-order-btn').off('click').on('click', function() {
+                    repeatOrder(order);
+                    $('#orderDetailModal').modal('hide');
+                });
+                
+                $('#orderDetailModal').modal('show');
+            });
+            
+            // Repetir pedido desde la lista
+            $(document).on('click', '.repeat-btn', function() {
+                const orderId = $(this).data('order-id');
+                const order = orders.find(o => o.id === orderId);
+                
+                if (order) {
+                    repeatOrder(order);
+                }
+            });
+            
+            // Función para repetir pedido
+            function repeatOrder(order) {
+                // Guardar en localStorage
+                localStorage.setItem('pizzaCart', JSON.stringify(order.items));
+                
+                // Mostrar notificación
+                alert(`¡El pedido #${order.id} se ha agregado a tu carrito!`);
+                
+                // Redirigir al carrito
+                window.location.href = 'ordernew.html';
+            }
+        });
+    </script>
+</body>
+</html>

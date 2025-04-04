@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Pizzería - Finalizar Pago</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .payment-card {
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .payment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .payment-method {
+            cursor: pointer;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .payment-method:hover, .payment-method.active {
+            border-color: #ff6b6b;
+            background-color: rgba(255, 107, 107, 0.05);
+        }
+        .payment-method.active {
+            border-color: #ff6b6b;
+            background-color: rgba(255, 107, 107, 0.1);
+        }
+        .card-input {
+            position: relative;
+        }
+        .card-input i {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+        .btn-primary {
+            background-color: #ff6b6b;
+            border-color: #ff6b6b;
+        }
+        .btn-primary:hover {
+            background-color: #ff5252;
+            border-color: #ff5252;
+        }
+        .summary-item {
+            border-bottom: 1px dashed #dee2e6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span class="fas fa-pizza-slice mr-2"></span>Pizzería <small>Deliciosa</small>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="indexnew.html" class="nav-link">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="viewmenu.html" class="nav-link">Menú</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="ordernew.html" class="nav-link">Carrito</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="history.html" class="nav-link">Historial</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="container py-5">
+        <div class="row">
+            <!-- Resumen del Pedido -->
+            <div class="col-lg-5 mb-4 mb-lg-0">
+                <div class="card payment-card">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0"><i class="fas fa-receipt mr-2"></i>Resumen del Pedido</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="mb-3">Detalles de Entrega</h5>
+                        <div class="mb-4">
+                            <p class="mb-1"><strong>Dirección:</strong> <span id="delivery-address">Calle Principal #123, Ciudad</span></p>
+                            <p class="mb-1"><strong>Teléfono:</strong> <span id="delivery-phone">+1 234 567 890</span></p>
+                            <p class="mb-1"><strong>Instrucciones:</strong> <span id="delivery-notes">Dejar en recepción</span></p>
+                            <a href="#" class="btn btn-sm btn-outline-primary mt-2">Editar</a>
+                        </div>
+                        
+                        <h5 class="mb-3">Items del Pedido</h5>
+                        <div class="mb-3" id="order-items-summary">
+                            <!-- Los items se cargarán aquí con JavaScript -->
+                            <div class="d-flex justify-content-between summary-item py-2">
+                                <span>Pizza Italiana x1</span>
+                                <span>$12.99</span>
+                            </div>
+                            <div class="d-flex justify-content-between summary-item py-2">
+                                <span>Pizza Pepperoni x2</span>
+                                <span>$27.98</span>
+                            </div>
+                            <div class="d-flex justify-content-between summary-item py-2">
+                                <span>Agua Mineral x2</span>
+                                <span>$3.98</span>
+                            </div>
+                        </div>
+                        
+                        <div class="border-top pt-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Subtotal:</span>
+                                <span id="summary-subtotal">$44.95</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Envío:</span>
+                                <span id="summary-delivery">$2.50</span>
+                            </div>
+                            <div class="d-flex justify-content-between font-weight-bold">
+                                <span>Total:</span>
+                                <span id="summary-total">$47.45</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Métodos de Pago -->
+            <div class="col-lg-7">
+                <div class="card payment-card">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0"><i class="fas fa-credit-card mr-2"></i>Método de Pago</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Opciones de Pago -->
+                        <div class="mb-4">
+                            <h5 class="mb-3">Selecciona método de pago</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="payment-method p-3 active" data-method="card" id="card-method">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" checked>
+                                            <label class="form-check-label" for="creditCard">
+                                                <i class="far fa-credit-card fa-2x mr-2"></i> Tarjeta de Crédito/Débito
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="payment-method p-3" data-method="cash" id="cash-method">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="paymentMethod" id="cashOnDelivery">
+                                            <label class="form-check-label" for="cashOnDelivery">
+                                                <i class="fas fa-money-bill-wave fa-2x mr-2"></i> Efectivo al entregar
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Formulario de Tarjeta (visible por defecto) -->
+                        <div id="card-payment-form">
+                            <h5 class="mb-3">Información de la Tarjeta</h5>
+                            <div class="form-group">
+                                <label for="cardNumber">Número de Tarjeta</label>
+                                <div class="card-input">
+                                    <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456">
+                                    <i class="far fa-credit-card"></i>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="cardExpiry">Fecha de Expiración</label>
+                                        <input type="text" class="form-control" id="cardExpiry" placeholder="MM/AA">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="cardCvv">CVV</label>
+                                        <div class="card-input">
+                                            <input type="text" class="form-control" id="cardCvv" placeholder="123">
+                                            <i class="fas fa-question-circle" data-toggle="tooltip" title="Los 3 dígitos en el reverso de tu tarjeta"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cardName">Nombre en la Tarjeta</label>
+                                <input type="text" class="form-control" id="cardName" placeholder="Nombre como aparece en la tarjeta">
+                            </div>
+                        </div>
+                        
+                        <!-- Información para pago en efectivo (oculta por defecto) -->
+                        <div id="cash-payment-info" class="d-none">
+                            <div class="alert alert-info">
+                                <h5><i class="fas fa-info-circle mr-2"></i>Pago en Efectivo</h5>
+                                <p class="mb-0">Por favor ten el monto exacto listo para cuando llegue el repartidor. El total a pagar es: <strong id="cash-total">$47.45</strong></p>
+                            </div>
+                        </div>
+                        
+                        <!-- Términos y Condiciones -->
+                        <div class="form-group form-check mt-4">
+                            <input type="checkbox" class="form-check-input" id="termsCheck">
+                            <label class="form-check-label" for="termsCheck">Acepto los <a href="#" data-toggle="modal" data-target="#termsModal">Términos y Condiciones</a></label>
+                        </div>
+                        
+                        <!-- Botón de Confirmación -->
+                        <button class="btn btn-primary btn-block btn-lg mt-3" id="confirm-payment">
+                            <i class="fas fa-lock mr-2"></i> Confirmar Pago
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2023 Pizzería Deliciosa. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal Términos y Condiciones -->
+    <div class="modal fade" id="termsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Términos y Condiciones</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5>Política de Pedidos</h5>
+                    <p>Los pedidos tienen un tiempo estimado de entrega de 30-45 minutos. En días festivos o de alta demanda, este tiempo puede extenderse.</p>
+                    
+                    <h5 class="mt-4">Política de Pagos</h5>
+                    <p>Los pagos con tarjeta están sujetos a verificación. En caso de que el pago sea rechazado, se le notificará y deberá proporcionar un método de pago alternativo.</p>
+                    
+                    <h5 class="mt-4">Política de Cancelación</h5>
+                    <p>Puede cancelar su pedido sin costo alguno antes de que comience su preparación. Una vez iniciada la preparación, se aplicará un cargo del 50% del total del pedido.</p>
+                    
+                    <h5 class="mt-4">Política de Reembolsos</h5>
+                    <p>En caso de error en su pedido o problemas con la calidad de los productos, puede solicitar un reembolso completo dentro de las 24 horas siguientes a la entrega.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación de Pago -->
+    <div class="modal fade" id="paymentConfirmation" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title"><i class="fas fa-check-circle mr-2"></i> Pago Completado</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-pizza-slice fa-4x text-success mb-4"></i>
+                    <h4>¡Gracias por tu pedido!</h4>
+                    <p id="order-number">Número de pedido: <strong>PZ-2023-045</strong></p>
+                    <p>Tu pizza estará lista en aproximadamente <strong>30-45 minutos</strong>.</p>
+                    <div class="alert alert-info mt-3 text-left">
+                        <h6><i class="fas fa-info-circle mr-2"></i>Detalles de Entrega:</h6>
+                        <p class="mb-1" id="delivery-details-modal">Calle Principal #123, Ciudad</p>
+                        <p class="mb-0" id="delivery-phone-modal">Teléfono: +1 234 567 890</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <a href="history.html" class="btn btn-primary">Ver Historial</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // 1. Cargar datos del pedido y dirección desde localStorage
+            const cart = JSON.parse(localStorage.getItem('pizzaCart')) || [];
+            const deliveryInfo = JSON.parse(localStorage.getItem('deliveryInfo')) || {
+                name: '',
+                phone: '',
+                address: '',
+                notes: ''
+            };
+
+            // Mostrar información de entrega
+            if(deliveryInfo.name) {
+                $('#delivery-address').text(deliveryInfo.address);
+                $('#delivery-phone').text(deliveryInfo.phone);
+                $('#delivery-notes').text(deliveryInfo.notes || 'Ninguna');
+                
+                // Para el modal de confirmación
+                $('#delivery-details-modal').text(deliveryInfo.address);
+                $('#delivery-phone-modal').text('Teléfono: ' + deliveryInfo.phone);
+            } else {
+                // Redirigir si no hay datos de entrega
+                alert('Por favor completa tus datos de entrega primero');
+                window.location.href = 'ordernew.html';
+            }
+
+            // 2. Validación mejorada de tarjeta de crédito
+            $('#cardNumber').on('input', function(e) {
+                // Solo permitir números y eliminar espacios
+                let value = $(this).val().replace(/\D/g, '').substring(0, 16);
+                
+                // Formatear con espacios cada 4 dígitos
+                if (value.length > 0) {
+                    value = value.match(new RegExp('.{1,4}', 'g')).join(' ');
+                }
+                $(this).val(value);
+            });
+
+            $('#cardExpiry').on('input', function(e) {
+                // Solo permitir números y limitar a 4 caracteres
+                let value = $(this).val().replace(/\D/g, '').substring(0, 4);
+                
+                // Insertar / después de 2 caracteres
+                if (value.length > 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2);
+                }
+                $(this).val(value);
+            });
+
+            $('#cardCvv').on('input', function(e) {
+                // Solo permitir números y limitar a 3-4 caracteres
+                let value = $(this).val().replace(/\D/g, '');
+                const maxLength = $(this).attr('maxlength') || 3;
+                $(this).val(value.substring(0, maxLength));
+            });
+
+            $('#cardName').on('input', function(e) {
+                // Solo permitir letras y espacios
+                $(this).val($(this).val().replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, ''));
+            });
+
+            // 3. Validación antes de procesar pago
+            $('#confirm-payment').click(function() {
+                // Validar términos
+                if (!$('#termsCheck').is(':checked')) {
+                    alert('Por favor acepta los Términos y Condiciones');
+                    return;
+                }
+
+                const paymentMethod = $('input[name="paymentMethod"]:checked').attr('id');
+                
+                // Validaciones específicas por método
+                if (paymentMethod === 'creditCard') {
+                    const cardNumber = $('#cardNumber').val().replace(/\s+/g, '');
+                    const cardExpiry = $('#cardExpiry').val();
+                    const cardCvv = $('#cardCvv').val();
+                    const cardName = $('#cardName').val();
+                    
+                    // Validar número de tarjeta (16 dígitos)
+                    if (!/^\d{16}$/.test(cardNumber)) {
+                        alert('Por favor ingresa un número de tarjeta válido (16 dígitos)');
+                        return;
+                    }
+                    
+                    // Validar fecha (MM/AA y que no esté expirada)
+                    if (!/^\d{2}\/\d{2}$/.test(cardExpiry)) {
+                        alert('Por favor ingresa una fecha de expiración válida (MM/AA)');
+                        return;
+                    }
+                    
+                    const [month, year] = cardExpiry.split('/');
+                    const currentYear = new Date().getFullYear() % 100;
+                    const currentMonth = new Date().getMonth() + 1;
+                    
+                    if (parseInt(year) < currentYear || 
+                        (parseInt(year) === currentYear && parseInt(month) < currentMonth)) {
+                        alert('La tarjeta está expirada');
+                        return;
+                    }
+                    
+                    // Validar CVV (3 o 4 dígitos)
+                    if (!/^\d{3,4}$/.test(cardCvv)) {
+                        alert('Por favor ingresa un CVV válido (3 o 4 dígitos)');
+                        return;
+                    }
+                    
+                    // Validar nombre
+                    if (cardName.trim().length < 3) {
+                        alert('Por favor ingresa el nombre como aparece en la tarjeta');
+                        return;
+                    }
+                }
+
+                // Generar número de pedido
+                const orderNumber = 'PZ-' + new Date().getFullYear() + '-' + 
+                    Math.random().toString(36).substr(2, 8).toUpperCase();
+
+                // Mostrar confirmación
+                $('#order-number strong').text(orderNumber);
+                $('#paymentConfirmation').modal('show');
+
+                // Guardar en historial (simulado)
+                const orders = JSON.parse(localStorage.getItem('orderHistory')) || [];
+                orders.push({
+                    id: orderNumber,
+                    date: new Date().toISOString(),
+                    status: 'pending',
+                    items: cart,
+                    total: parseFloat($('#summary-total').text().substring(1)),
+                    address: deliveryInfo.address,
+                    payment: paymentMethod === 'creditCard' ? 'Tarjeta' : 'Efectivo'
+                });
+                localStorage.setItem('orderHistory', JSON.stringify(orders));
+                
+                // Limpiar carrito (excepto datos de entrega)
+                localStorage.removeItem('pizzaCart');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Pizzería - Mi Pedido</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .pizza-item {
+            transition: all 0.3s ease;
+        }
+        .pizza-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .order-summary {
+            position: sticky;
+            top: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .form-control:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 0 0.25rem rgba(255, 107, 107, 0.25);
+        }
+        .btn-primary {
+            background-color: #ff6b6b;
+            border-color: #ff6b6b;
+        }
+        .btn-primary:hover {
+            background-color: #ff5252;
+            border-color: #ff5252;
+        }
+        .color{
+            background-color: #f8b500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="indexnew.html">
+                <span class="fas fa-pizza-slice mr-2"></span>Pizzería <small>Deliciosa</small>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="indexnew.html" class="nav-link">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="viewmenu.html" class="nav-link">Menú</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="ordernew.html" class="nav-link">Carrito de compras</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="historial.html" class="nav-link">Historial</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="container py-5">
+        <div class="row">
+            <!-- Resumen del Pedido -->
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-header color text-white">
+                        <h4 class="mb-0"><i class="fas fa-shopping-cart mr-2"></i>Tu Pedido</h4>
+                    </div>
+                    <div class="card-body">
+                        <div id="cart-items-container">
+                            <!-- Los items del carrito se cargarán aquí con JavaScript -->
+                            <div class="text-center py-4" id="empty-cart-message">
+                                <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+                                <h5 class="text-muted">Tu carrito está vacío</h5>
+                                <a href="viewmenu.html" class="btn btn-primary mt-3">Ir al Menú</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Información de Entrega -->
+                <div class="card mb-4">
+                    <div class="card-header color text-white">
+                        <h4 class="mb-0"><i class="fas fa-truck mr-2"></i>Información de Entrega</h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="delivery-form">
+                            <div class="form-group">
+                                <label for="name">Nombre Completo</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Teléfono</label>
+                                <input type="tel" class="form-control" id="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Dirección</label>
+                                <input type="text" class="form-control" id="address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="notes">Instrucciones adicionales</label>
+                                <textarea class="form-control" id="notes" rows="3"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumen de Compra -->
+            <div class="col-lg-4">
+                <div class="card order-summary">
+                    <div class="card-header color text-white">
+                        <h4 class="mb-0"><i class="fas fa-receipt mr-2"></i>Resumen</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal:</span>
+                            <span id="subtotal">$0.00</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Envío:</span>
+                            <span id="delivery-fee">$2.50</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between mb-3">
+                            <strong>Total:</strong>
+                            <strong id="total">$2.50</strong>
+                        </div>
+                        
+                            <a href="payment.html" class="btn btn-success btn-block">Pagar Ahora</a>
+                        
+                    </div>
+                </div>
+
+                <!-- Métodos de Pago -->
+                <div class="card mt-4">
+                    <div class="card-header color text-white">
+                        <h4 class="mb-0"><i class="fas fa-credit-card mr-2"></i>Método de Pago</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="payment" id="cash" checked>
+                            <label class="form-check-label" for="cash">
+                                Efectivo al entregar
+                            </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="payment" id="card">
+                            <label class="form-check-label" for="card">
+                                Tarjeta de crédito/débito
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2023 Pizzería Deliciosa. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal de Confirmación -->
+    <div class="modal fade" id="orderConfirmation" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">¡Pedido Confirmado!</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-check-circle fa-5x text-success mb-4"></i>
+                    <h4>Gracias por tu pedido</h4>
+                    <p id="order-details">Tu pizza estará lista en aproximadamente 30-45 minutos.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let cart = JSON.parse(localStorage.getItem('pizzaCart')) || [];
+            
+            // Mostrar items del carrito
+            function displayCartItems() {
+                const $cartContainer = $('#cart-items-container');
+                const $emptyCartMessage = $('#empty-cart-message');
+                const $subtotal = $('#subtotal');
+                const $total = $('#total');
+                
+                if (cart.length === 0) {
+                    $emptyCartMessage.show();
+                    $subtotal.text('$0.00');
+                    $total.text('$2.50');
+                    return;
+                }
+                
+                $emptyCartMessage.hide();
+                
+                let subtotal = 0;
+                let html = '';
+                
+                cart.forEach((item, index) => {
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
+                    
+                    html += `
+                        <div class="d-flex justify-content-between align-items-center mb-3 pizza-item p-3 border rounded">
+                            <div class="d-flex align-items-center">
+                                <img src="images/pizza-${item.id}.jpg" alt="${item.name}" class="rounded mr-3" width="60" height="60">
+                                <div>
+                                    <h6 class="mb-1">${item.name}</h6>
+                                    <small class="text-muted">$${item.price.toFixed(2)} c/u</small>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="input-group quantity-selector" style="width: 120px;">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary decrease-quantity" type="button" data-index="${index}">-</button>
+                                    </div>
+                                    <input type="text" class="form-control text-center quantity-input" value="${item.quantity}" readonly>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary increase-quantity" type="button" data-index="${index}">+</button>
+                                    </div>
+                                </div>
+                                <span class="ml-3 font-weight-bold" style="width: 70px; text-align: right;">$${itemTotal.toFixed(2)}</span>
+                                <button class="btn btn-sm btn-outline-danger ml-2 remove-item" data-index="${index}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                $cartContainer.html(html);
+                $subtotal.text('$' + subtotal.toFixed(2));
+                $total.text('$' + (subtotal + 2.5).toFixed(2));
+            }
+            
+            // Cargar carrito al inicio
+            displayCartItems();
+            
+            // Aumentar cantidad
+            $(document).on('click', '.increase-quantity', function() {
+                const index = $(this).data('index');
+                cart[index].quantity++;
+                localStorage.setItem('pizzaCart', JSON.stringify(cart));
+                displayCartItems();
+            });
+            
+            // Disminuir cantidad
+            $(document).on('click', '.decrease-quantity', function() {
+                const index = $(this).data('index');
+                if (cart[index].quantity > 1) {
+                    cart[index].quantity--;
+                } else {
+                    cart.splice(index, 1);
+                }
+                localStorage.setItem('pizzaCart', JSON.stringify(cart));
+                displayCartItems();
+            });
+            
+            // Eliminar item
+            $(document).on('click', '.remove-item', function() {
+                const index = $(this).data('index');
+                cart.splice(index, 1);
+                localStorage.setItem('pizzaCart', JSON.stringify(cart));
+                displayCartItems();
+            });
+            
+            // Procesar pedido
+            $('#checkout-btn').click(function() {
+                if (cart.length === 0) {
+                    alert('Tu carrito está vacío. Agrega algunos productos primero.');
+                    return;
+                }
+                
+                if (!$('#delivery-form')[0].checkValidity()) {
+                    alert('Por favor completa todos los campos requeridos.');
+                    return;
+                }
+                
+                // Enviar los datos al servidor
+                const orderData = {
+                    items: cart,
+                    customer: {
+                        name: $('#name').val(),
+                        phone: $('#phone').val(),
+                        address: $('#address').val(),
+                        notes: $('#notes').val()
+                    },
+                    payment: $('input[name="payment"]:checked').attr('id'),
+                    total: $('#total').text()
+                };
+                
+                // Mostrar confirmación
+                $('#order-details').html(`
+                    Hemos recibido tu pedido de ${cart.reduce((acc, item) => acc + item.quantity, 0)} items.<br>
+                    Total: ${$('#total').text()}<br><br>
+                    <strong>Dirección de entrega:</strong><br>
+                    ${$('#address').val()}
+                `);
+                
+                $('#orderConfirmation').modal('show');
+                
+                // Limpiar carrito después de la compra
+                cart = [];
+                localStorage.setItem('pizzaCart', JSON.stringify(cart));
+                displayCartItems();
+            });
+        });
+    </script>
+</body>
+</html>
