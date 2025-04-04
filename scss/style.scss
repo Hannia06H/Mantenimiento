@@ -28,7 +28,13 @@ $secondary: #f8b500;
     transition:         all $transition ease;
 }
 
+<<<<<<< HEAD
 
+=======
+html {
+	// overflow-x: hidden;
+}
+>>>>>>> 3a7dd1453c33e71b74a83ce828aa912bd47a513b
 body {
 	font-family: $font-primary;
 	background: $darken;
@@ -416,7 +422,12 @@ h1, h2, h3, h4, h5,
 					padding: 0;
 					li{
 						list-style: none;
+<<<<<<< HEAD
 						
+=======
+						span{
+						}
+>>>>>>> 3a7dd1453c33e71b74a83ce828aa912bd47a513b
 					}
 				}
 				//BREADCRUBS
@@ -850,7 +861,11 @@ h1, h2, h3, h4, h5,
 			z-index: -1;
 		}
 		h3{
+<<<<<<< HEAD
 			width: calc(100% - 80px);
+=======
+			width: calc(100% - 80px;);
+>>>>>>> 3a7dd1453c33e71b74a83ce828aa912bd47a513b
 			font-size: 18px;
 			span{
 				background: $darken;
@@ -1015,7 +1030,14 @@ h1, h2, h3, h4, h5,
 		@include border-radius(50%);
 		@include transition(.3s);
 	}
+<<<<<<< HEAD
 	
+=======
+	.text{
+		p{
+		}
+	}
+>>>>>>> 3a7dd1453c33e71b74a83ce828aa912bd47a513b
 	&:hover, &:focus{
 		-webkit-box-shadow: 0px 3px 66px -24px rgba(0,0,0,0.2);
 		-moz-box-shadow: 0px 3px 66px -24px rgba(0,0,0,0.2);
@@ -1146,13 +1168,24 @@ textarea.form-control {
 
 //ABOUT
 .about-author{
+<<<<<<< HEAD
 	
+=======
+	img{
+	}
+>>>>>>> 3a7dd1453c33e71b74a83ce828aa912bd47a513b
 	.desc{
 		h3{
 			font-size: 24px;
 		}
 	}
+<<<<<<< HEAD
 	
+=======
+	.bio{
+
+	}
+>>>>>>> 3a7dd1453c33e71b74a83ce828aa912bd47a513b
 }
 
 
@@ -1459,7 +1492,11 @@ textarea.form-control {
 .mfp-with-zoom .mfp-container,
 .mfp-with-zoom.mfp-bg {
   opacity: 0;
+<<<<<<< HEAD
   
+=======
+  -webkit-backface-visibility: hidden;
+>>>>>>> 3a7dd1453c33e71b74a83ce828aa912bd47a513b
   -webkit-transition: all 0.3s ease-out; 
   -moz-transition: all 0.3s ease-out; 
   -o-transition: all 0.3s ease-out; 
@@ -1572,7 +1609,12 @@ textarea.form-control {
 	position: relative;
 	width: 100%;
 	display: block;
+<<<<<<< HEAD
 	
+=======
+	.nav-link-wrap{
+	}
+>>>>>>> 3a7dd1453c33e71b74a83ce828aa912bd47a513b
 	.nav-pills{
 		p{
 			margin-bottom: 0;
@@ -1609,7 +1651,14 @@ textarea.form-control {
 			}
 		}
 	}
+<<<<<<< HEAD
 	
+=======
+	.tab-content{
+		.tab-pane{
+		}
+	}
+>>>>>>> 3a7dd1453c33e71b74a83ce828aa912bd47a513b
 }
 
 //blocks 
