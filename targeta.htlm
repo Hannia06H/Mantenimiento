@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizza California - Menú</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+    .pizza-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .pizza-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    .nutrition-bar {
+      transition: width 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="max-w-4xl mx-auto">
+    <!-- Tarjeta de Pizza Mejorada -->
+    <div class="pizza-card flex flex-col md:flex-row bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-700">
+      <!-- Sección de la imagen -->
+      <div class="md:w-2/5 relative">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
+             alt="Pizza California" 
+             class="w-full h-64 md:h-full object-cover">
+        <div class="absolute top-4 left-4 bg-amber-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+          NUEVO
+        </div>
+        <div class="absolute bottom-4 right-4 bg-white dark:bg-gray-700 px-3 py-1 rounded-full shadow flex items-center">
+          <span class="text-yellow-500 mr-1">★</span>
+          <span class="text-sm font-semibold dark:text-white">4.8</span>
+        </div>
+      </div>
+
+      <!-- Sección de contenido -->
+      <div class="md:w-3/5 p-6 md:p-8">
+        <!-- Encabezado -->
+        <div class="flex justify-between items-start">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">Pizza California</h2>
+            <p class="text-gray-600 dark:text-gray-300 italic text-sm">Especialidad de la casa</p>
+          </div>
+          <span class="bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400 px-3 py-1 rounded-full text-xs font-bold">
+            🔥 PICANTE
+          </span>
+        </div>
+
+        <!-- Ingredientes -->
+        <div class="mt-4">
+          <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">INGREDIENTES PRINCIPALES:</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-amber-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">
+              🦃 Pavo
+            </span>
+            <span class="bg-green-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">
+              🥬 Lechuga
+            </span>
+            <span class="bg-red-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">
+              🍅 Tomates
+            </span>
+            <span class="bg-yellow-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">
+              � Queso especial
+            </span>
+          </div>
+        </div>
+
+        <!-- Precios -->
+        <div class="mt-6">
+          <div class="flex items-end gap-2">
+            <span class="text-3xl font-bold text-amber-600 dark:text-amber-400">$25.90</span>
+            <span class="text-gray-400 line-through">$29.90</span>
+            <span class="ml-auto bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400 px-2 py-1 rounded text-xs font-bold">
+              ¡13% DE DESCUENTO!
+            </span>
+          </div>
+          <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">
+            GRANDE (8 porciones) o $13.90 PEQUEÑA (4 porciones)
+          </p>
+        </div>
+
+        <!-- Información nutricional -->
+        <div class="mt-6">
+          <p class="text-gray-500 dark:text-gray-400 text-sm mb-3">INFORMACIÓN NUTRICIONAL (por porción):</p>
+          
+          <div class="space-y-3">
+            <!-- Calorías -->
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-gray-700 dark:text-gray-300">Calorías</span>
+                <span class="font-medium">510kcal</span>
+              </div>
+              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                <div class="nutrition-bar bg-yellow-500 h-2 rounded-full" style="width: 43%"></div>
+              </div>
+            </div>
+            
+            <!-- Proteínas -->
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-gray-700 dark:text-gray-300">Proteínas</span>
+                <span class="font-medium">44g</span>
+              </div>
+              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                <div class="nutrition-bar bg-red-500 h-2 rounded-full" style="width: 59%"></div>
+              </div>
+            </div>
+            
+            <!-- Carbohidratos -->
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-gray-700 dark:text-gray-300">Carbohidratos</span>
+                <span class="font-medium">50g</span>
+              </div>
+              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                <div class="nutrition-bar bg-green-500 h-2 rounded-full" style="width: 20%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controles -->
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center border border-gray-200 dark:border-gray-700 rounded-full">
+            <button class="quantity-btn bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white w-10 h-10 rounded-l-full flex items-center justify-center">
+              -
+            </button>
+            <span class="mx-4 w-8 text-center font-medium">1</span>
+            <button class="quantity-btn bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white w-10 h-10 rounded-r-full flex items-center justify-center">
+              +
+            </button>
+          </div>
+          
+          <button class="order-btn bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white px-8 py-3 rounded-full font-bold w-full sm:w-auto text-center shadow-md hover:shadow-lg transition-all">
+            🛒 Añadir al carrito
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Interacción para los botones de cantidad
+    document.querySelectorAll('.quantity-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        const quantityElement = this.parentElement.querySelector('span');
+        let quantity = parseInt(quantityElement.textContent);
+        
+        if (this.textContent === '+') {
+          quantity++;
+        } else if (this.textContent === '-' && quantity > 1) {
+          quantity--;
+        }
+        
+        quantityElement.textContent = quantity;
+      });
+    });
+    
+    // Efecto al hacer hover en el botón de ordenar
+    const orderBtn = document.querySelector('.order-btn');
+    orderBtn.addEventListener('mouseenter', function() {
+      this.style.transform = 'scale(1.02)';
+    });
+    orderBtn.addEventListener('mouseleave', function() {
+      this.style.transform = 'scale(1)';
+    });
+  </script>
+</body>
+</html>
