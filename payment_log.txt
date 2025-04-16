@@ -1,0 +1,39 @@
+2025-04-12 21:19:15
+Array
+(
+    [cart] => Array
+        (
+            [0] => Array
+                (
+                    [id_producto] => 5
+                    [name] => Pizza BBQ
+                    [quantity] => 1
+                    [price] => 16.99
+                    [notes] => 
+                )
+
+        )
+
+    [deliveryInfo] => Array
+        (
+            [address] => la nopalera s-n
+            [phone] => 7721254319
+            [notes] => sad
+        )
+
+    [payment] => Array
+        (
+            [method] => creditCard
+        )
+
+    [amounts] => Array
+        (
+            [subtotal] => 16.99
+            [delivery] => 2.5
+            [total] => 19.49
+        )
+
+    [userId] => 1
+)
+
+
