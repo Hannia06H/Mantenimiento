@@ -14,7 +14,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 
 // Procesar el pedido (ejemplo simplificado)
 try {
-    // Aquí iría tu lógica para guardar en la base de datos
+    // Lógica para guardar en la base de datos
     
     $response = [
         'success' => true,
