@@ -31,6 +31,7 @@ require 'config/database.php';
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
+            
         }
         .hero-content {
             position: relative;
@@ -101,7 +102,7 @@ require 'config/database.php';
     <section class="hero-section">
         <div class="container hero-content text-center">
             <h1 class="display-4 mb-4">Deliciosas Pizzas </h1>
-            <p class="lead mb-5">Selecciona tus favoritas y ordenalas en linea </p>
+            <p class="lead mb-5">Selecciona tus favoritas y ordénalas en línea </p>
             <a href="viewmenu.php" class="btn btn-primary btn-lg px-5 py-3">
                 <i class="fas fa-utensils mr-2"></i> Ver Menú
             </a>
@@ -112,7 +113,7 @@ require 'config/database.php';
     <section class="py-5 bg-light">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="display-5 text-dark" >Catalogo de Pizzas</h2>
+                <h2 class="display-5 text-dark" >Catálogo de Pizzas</h2>
                 <p class="lead text-muted">Selecciona las pizzas que deseas ordenar</p>
             </div>
             <div class="row">
