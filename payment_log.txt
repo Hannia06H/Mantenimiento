@@ -37,3 +37,330 @@ Array
 )
 
 
+2025-04-16 16:07:08
+Array
+(
+    [cart] => Array
+        (
+            [0] => Array
+                (
+                    [id_producto] => 8
+                    [name] => Pizza Carnes
+                    [quantity] => 1
+                    [price] => 18.99
+                    [notes] => 
+                )
+
+            [1] => Array
+                (
+                    [id_producto] => 2
+                    [name] => Pizza Hawaiana
+                    [quantity] => 1
+                    [price] => 14.99
+                    [notes] => 
+                )
+
+            [2] => Array
+                (
+                    [id_producto] => 7
+                    [name] => Pizza Cuatro Quesos
+                    [quantity] => 1
+                    [price] => 17.99
+                    [notes] => 
+                )
+
+            [3] => Array
+                (
+                    [id_producto] => 5
+                    [name] => Pizza BBQ
+                    [quantity] => 1
+                    [price] => 16.99
+                    [notes] => 
+                )
+
+        )
+
+    [deliveryInfo] => Array
+        (
+            [address] => la estancia
+            [phone] => 389283991
+            [notes] => casa blanca
+        )
+
+    [payment] => Array
+        (
+            [method] => cashOnDelivery
+        )
+
+    [amounts] => Array
+        (
+            [subtotal] => 68.96
+            [delivery] => 2.5
+            [total] => 71.46
+        )
+
+    [userId] => 2
+)
+
+
+2025-04-16 16:08:05
+Array
+(
+    [cart] => Array
+        (
+            [0] => Array
+                (
+                    [id_producto] => 8
+                    [name] => Pizza Carnes
+                    [quantity] => 1
+                    [price] => 18.99
+                    [notes] => 
+                )
+
+            [1] => Array
+                (
+                    [id_producto] => 2
+                    [name] => Pizza Hawaiana
+                    [quantity] => 1
+                    [price] => 14.99
+                    [notes] => 
+                )
+
+            [2] => Array
+                (
+                    [id_producto] => 7
+                    [name] => Pizza Cuatro Quesos
+                    [quantity] => 1
+                    [price] => 17.99
+                    [notes] => 
+                )
+
+            [3] => Array
+                (
+                    [id_producto] => 5
+                    [name] => Pizza BBQ
+                    [quantity] => 1
+                    [price] => 16.99
+                    [notes] => 
+                )
+
+        )
+
+    [deliveryInfo] => Array
+        (
+            [address] => la estancia
+            [phone] => 389283991
+            [notes] => casa blanca
+        )
+
+    [payment] => Array
+        (
+            [method] => cashOnDelivery
+        )
+
+    [amounts] => Array
+        (
+            [subtotal] => 68.96
+            [delivery] => 2.5
+            [total] => 71.46
+        )
+
+    [userId] => 2
+)
+
+
+2025-04-17 01:31:56
+Array
+(
+    [cart] => Array
+        (
+            [0] => Array
+                (
+                    [id_producto] => 7
+                    [name] => Pizza Cuatro Quesos
+                    [quantity] => 1
+                    [price] => 17.99
+                    [notes] => 
+                )
+
+        )
+
+    [deliveryInfo] => Array
+        (
+            [address] => la estancia
+            [phone] => 7714097939
+            [notes] => casa blanca
+        )
+
+    [payment] => Array
+        (
+            [method] => cashOnDelivery
+        )
+
+    [amounts] => Array
+        (
+            [subtotal] => 17.99
+            [delivery] => 2.5
+            [total] => 20.49
+        )
+
+    [userId] => 2
+)
+
+
+2025-04-17 01:44:20
+Array
+(
+    [cart] => Array
+        (
+            [0] => Array
+                (
+                    [id_producto] => 5
+                    [name] => Pizza BBQ
+                    [quantity] => 1
+                    [price] => 15.99
+                    [notes] => 
+                )
+
+        )
+
+    [deliveryInfo] => Array
+        (
+            [address] => la estancia
+            [phone] => 7714097939
+            [notes] => casa blanca
+        )
+
+    [payment] => Array
+        (
+            [method] => cashOnDelivery
+        )
+
+    [amounts] => Array
+        (
+            [subtotal] => 15.99
+            [delivery] => 2.5
+            [total] => 18.49
+        )
+
+    [userId] => 2
+)
+
+
+2025-04-17 02:01:59
+Array
+(
+    [cart] => Array
+        (
+            [0] => Array
+                (
+                    [id_producto] => 5
+                    [name] => Pizza BBQ
+                    [quantity] => 1
+                    [price] => 16.99
+                    [notes] => 
+                )
+
+        )
+
+    [deliveryInfo] => Array
+        (
+            [address] => Calle Falsa 123
+            [phone] => 1234567890
+            [notes] => 
+        )
+
+    [payment] => Array
+        (
+            [method] => creditCard
+        )
+
+    [amounts] => Array
+        (
+            [subtotal] => 16.99
+            [delivery] => 2.5
+            [total] => 19.49
+        )
+
+    [userId] => 2
+)
+
+
+2025-04-17 02:06:23
+Array
+(
+    [cart] => Array
+        (
+            [0] => Array
+                (
+                    [id_producto] => 5
+                    [name] => Pizza BBQ
+                    [quantity] => 1
+                    [price] => 16.99
+                    [notes] => 
+                )
+
+        )
+
+    [deliveryInfo] => Array
+        (
+            [address] => Calle Falsa 123
+            [phone] => 1234567890
+            [notes] => 
+        )
+
+    [payment] => Array
+        (
+            [method] => creditCard
+        )
+
+    [amounts] => Array
+        (
+            [subtotal] => 16.99
+            [delivery] => 2.5
+            [total] => 19.49
+        )
+
+    [userId] => 2
+)
+
+
+2025-04-17 02:06:46
+Array
+(
+    [cart] => Array
+        (
+            [0] => Array
+                (
+                    [id_producto] => 5
+                    [name] => Pizza BBQ
+                    [quantity] => 1
+                    [price] => 16.99
+                    [notes] => 
+                )
+
+        )
+
+    [deliveryInfo] => Array
+        (
+            [address] => Calle Falsa 123
+            [phone] => 1234567890
+            [notes] => 
+        )
+
+    [payment] => Array
+        (
+            [method] => creditCard
+        )
+
+    [amounts] => Array
+        (
+            [subtotal] => 16.99
+            [delivery] => 2.5
+            [total] => 19.49
+        )
+
+    [userId] => 2
+)
+
+

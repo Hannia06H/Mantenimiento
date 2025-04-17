@@ -101,7 +101,7 @@ if (!isset($_SESSION['user_id'])) {
                         <a href="ordernew.php" class="nav-link">Carrito</a>
                     </li>
                     <li class="nav-item">
-                        <a href="history.php" class="nav-link">Historial</a>
+                        <a href="historial.php" class="nav-link">Historial</a>
                     </li>
                 </ul>
             </div>
@@ -255,23 +255,25 @@ if (!isset($_SESSION['user_id'])) {
         </div>
     </div>
 
-    <!-- Modal de Confirmación de Pago -->
-    <div class="modal fade" id="paymentConfirmation" tabindex="-1" aria-hidden="true">
+       <!-- Modal de Confirmación de Pago (Versión Simplificada) -->
+       <div class="modal fade" id="paymentConfirmation" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-success text-white">
                     <h5 class="modal-title">¡Pedido Confirmado!</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <p>Tu pedido ha sido procesado exitosamente.</p>
-                    <p><strong>Número de pedido:</strong> <span id="order-number"></span></p>
-                    <p><strong>Dirección de entrega:</strong> <span id="delivery-details-modal"></span></p>
-                    <p><span id="delivery-phone-modal"></span></p>
-                    <p><strong>Tiempo estimado de entrega:</strong> <span id="delivery-eta"></span></p>
+                <div class="modal-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-check-circle fa-5x text-success"></i>
+                    </div>
+                    <h4 class="mb-3">¡Pedido exitoso!</h4>
+                    <p class="mb-0">Serás redirigido a la página principal.</p>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Aceptar</button>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-success" onclick="window.location.href='indexnew.php'">
+                        <i class="fas fa-home me-2"></i>Ir al Inicio
+                    </button>
                 </div>
             </div>
         </div>
@@ -453,15 +455,15 @@ if (!isset($_SESSION['user_id'])) {
                     console.log('Respuesta:', response);
                     if (response?.success) {
                         localStorage.removeItem('pizzaCart');
-                        if (response.orderId) {
-                            window.location.href = 'confirmacion.php?id=' + response.orderId;
-                        } else {
-                            showOrderConfirmation({
-                                id: 'temp-' + Date.now(),
-                                address: deliveryInfo.address,
-                                phone: deliveryInfo.phone
-                            });
-                        }
+                        
+                        // Mostrar modal de confirmación
+                        const modal = new bootstrap.Modal(document.getElementById('paymentConfirmation'));
+                        modal.show();
+                        
+                        // Redirigir después de 3 segundos
+                        setTimeout(function() {
+                            window.location.href = 'indexnew.php';
+                        }, 3000);
                     } else {
                         alert(response?.message || 'Error desconocido');
                     }
@@ -513,20 +515,6 @@ if (!isset($_SESSION['user_id'])) {
             
             $('#cardNumber, #cardExpiry, #cardCvv, #cardName').removeClass('is-invalid');
             return { valid: true };
-        }
-
-        function showOrderConfirmation(order) {
-            $('#order-number').text(order.id);
-            $('#delivery-details-modal').text(order.address);
-            $('#delivery-phone-modal').text('Teléfono: ' + order.phone);
-            $('#delivery-eta').text(Math.floor(Math.random() * 16) + 30 + ' minutos');
-            
-            const modal = new bootstrap.Modal(document.getElementById('paymentConfirmation'));
-            modal.show();
-            
-            $('#paymentConfirmation').on('hidden.bs.modal', function() {
-                window.location.href = 'history.php';
-            });
         }
 
         // Inicializar tooltips

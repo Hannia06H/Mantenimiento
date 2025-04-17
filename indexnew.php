@@ -81,7 +81,7 @@ require 'config/database.php';
                         <a href="ordernew.php" class="nav-link">Carrito</a>
                     </li>
                     <li class="nav-item">
-                        <a href="historical.php" class="nav-link">Historial</a>
+                        <a href="historial.php" class="nav-link">Historial</a>
                     </li>
                     <?php if(isset($_SESSION['user_id'])): ?>
                         <li class="nav-item">
@@ -100,8 +100,8 @@ require 'config/database.php';
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container hero-content text-center">
-            <h1 class="display-4 mb-4">Las mejores pizzas artesanales</h1>
-            <p class="lead mb-5">Ingredientes frescos y preparación tradicional desde 1985</p>
+            <h1 class="display-4 mb-4">Deliciosas Pizzas </h1>
+            <p class="lead mb-5">Selecciona tus favoritas y ordenalas en linea </p>
             <a href="viewmenu.php" class="btn btn-primary btn-lg px-5 py-3">
                 <i class="fas fa-utensils mr-2"></i> Ver Menú
             </a>
@@ -112,8 +112,8 @@ require 'config/database.php';
     <section class="py-5 bg-light">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="display-5">Nuestras Especialidades</h2>
-                <p class="lead text-muted">Las pizzas más pedidas por nuestros clientes</p>
+                <h2 class="display-5 text-dark" >Catalogo de Pizzas</h2>
+                <p class="lead text-muted">Selecciona las pizzas que deseas ordenar</p>
             </div>
             <div class="row">
                 <!-- Pizza 1 -->
@@ -122,7 +122,7 @@ require 'config/database.php';
                         <div class="special-badge">Más vendida</div>
                         <img src="images/pizza-1.jpg" class="card-img-top" alt="Pizza Italiana">
                         <div class="card-body">
-                            <h5 class="card-title">Italiana Clásica</h5>
+                            <h5 class="card-title text-dark">Italiana Clásica</h5>
                             <p class="card-text">Salsa de tomate, mozzarella fresca, albahaca y aceite de oliva virgen extra.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="h4 text-primary mb-0">$12.99</span>
@@ -140,7 +140,7 @@ require 'config/database.php';
                         <div class="special-badge">Novedad</div>
                         <img src="images/pizza-5.jpg" class="card-img-top" alt="Pizza BBQ">
                         <div class="card-body">
-                            <h5 class="card-title">BBQ Especial</h5>
+                            <h5 class="card-title text-dark">BBQ Especial</h5>
                             <p class="card-text">Pollo, salsa BBQ casera, cebolla caramelizada y mezcla de quesos.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="h4 text-primary mb-0">$15.99</span>
@@ -155,7 +155,7 @@ require 'config/database.php';
                 <!-- Pizza 3 -->
                 <div class="col-md-4">
                     <div class="card pizza-card h-100">
-                        <div class="special-badge">Recomendada</div>
+                        <div class="special-badge text-dark">Recomendada</div>
                         <img src="images/pizza-7.jpg" class="card-img-top" alt="Pizza 4 Quesos">
                         <div class="card-body">
                             <h5 class="card-title">Cuatro Quesos</h5>
@@ -173,83 +173,7 @@ require 'config/database.php';
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="py-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <img src="images/about.jpg" class="img-fluid rounded" alt="Sobre nosotros">
-                </div>
-                <div class="col-md-6">
-                    <h2 class="display-5 mb-4">Nuestra Historia</h2>
-                    <p class="lead">Más de 35 años sirviendo auténtica pizza italiana</p>
-                    <p>Fundada en 1985 por el maestro pizzero Giovanni Rossi, mantenemos la tradición de preparar pizzas al estilo napolitano con ingredientes importados directamente de Italia.</p>
-                    <p>Nuestra masa fermenta por 48 horas para lograr la textura perfecta y usamos solamente tomates San Marzano D.O.P. para nuestra salsa.</p>
-                    <a href="#" class="btn btn-outline-primary">Conoce más</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="py-5 bg-light">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="display-5">Lo que dicen nuestros clientes</h2>
-                <p class="lead text-muted">Opiniones reales de nuestros comensales</p>
-            </div>
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <img src="images/person_1.jpg" class="rounded-circle mb-3" width="80" alt="Cliente 1">
-                            <h5>Carlos Méndez</h5>
-                            <p class="text-muted">"La mejor pizza que he probado en la ciudad. La masa es perfecta y los ingredientes siempre frescos."</p>
-                            <div class="text-warning">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <img src="images/person_2.jpg" class="rounded-circle mb-3" width="80" alt="Cliente 2">
-                            <h5>Ana Rodríguez</h5>
-                            <p class="text-muted">"El servicio a domicilio es rápido y la pizza llega caliente. La Hawaiana es mi favorita."</p>
-                            <div class="text-warning">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <img src="images/person_3.jpg" class="rounded-circle mb-3" width="80" alt="Cliente 3">
-                            <h5>Javier López</h5>
-                            <p class="text-muted">"Auténtico sabor italiano. La Cuatro Quesos es simplemente increíble. ¡Volveré pronto!"</p>
-                            <div class="text-warning">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- Call to Action -->
     <section class="py-5 bg-primary text-white">
