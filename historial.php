@@ -2,13 +2,13 @@
 session_start();
 require 'config/database.php';
 
-// Verificar si el usuario está logueado
+// Verifica si el usuario está logueado
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
 }
 
-// Obtener historial de pedidos del usuario
+// Obtiene el historial de pedidos del usuario
 $stmt = $pdo->prepare("
     SELECT p.*, 
            GROUP_CONCAT(CONCAT(dp.cantidad, 'x ', pr.nombre, ' ($', dp.precio_unitario, ')')) AS items,
