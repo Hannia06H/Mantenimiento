@@ -183,7 +183,7 @@ if (!isset($_SESSION['user_id'])) {
                             </div>
                         </div>
                         
-                        <!-- Formulario de Tarjeta -->
+                        <!-- Formulario para Pago con Tarjeta -->
                         <div id="card-payment-form">
                             <div class="mb-3">
                                 <label for="cardNumber" class="form-label">Número de Tarjeta</label>
@@ -206,7 +206,7 @@ if (!isset($_SESSION['user_id'])) {
                             </div>
                         </div>
                         
-                        <!-- Información para pago en efectivo -->
+                        <!-- Información para Pago en Efectivo -->
                         <div id="cash-payment-info" class="d-none">
                             <div class="alert alert-info">
                                 <h5><i class="fas fa-info-circle me-2"></i>Pago en Efectivo</h5>
